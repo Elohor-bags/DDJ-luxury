@@ -1,0 +1,764 @@
+<title>DDJ Luxury | Curated Inclusive Fashion</title>
+<style>
+  /*
+     Design Concept: "High-End Boutique Editorial"
+     A shift toward a more "exclusive" feel. By removing prices, we shift the conversation
+     from "How much?" to "I need this." This creates a luxury psychology.
+  */
+  :root {
+    --bg: #fffaf8;
+    --fg: #1a1a1a;
+    --accent: #a67c52; /* Warm Gold/Bronze for a sense of wealth and quality */
+    --accent-light: #fdf6f0;
+    --muted: #7a7a7a;
+    --border: #eee4db;
+    --surface: #ffffff;
+    --error: #b91c1c;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f0f0f;
+      --fg: #f5f5f5;
+      --accent: #c5a076;
+      --accent-light: #1a1a1a;
+      --muted: #a0a0a0;
+      --border: #2d2d2d;
+      --surface: #161616;
+      --error: #ef4444;
+      color-scheme: dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0f0f0f;
+    --fg: #f5f5f5;
+    --accent: #c5a076;
+    --accent-light: #1a1a1a;
+    --muted: #a0a0a0;
+    --border: #2d2d2d;
+    --surface: #161616;
+    --error: #ef4444;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    margin: 0;
+    line-height: 1.7;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, .display {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .text-muted { color: var(--muted); }
+  .text-accent { color: var(--accent); }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Navigation */
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 100;
+    background: rgba(var(--surface), 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 0;
+  }
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--fg);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--fg);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--fg);
+    font-size: 1.3rem;
+    position: relative;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.65rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  /* Hero Section - More Alluring */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    min-height: 90vh;
+    align-items: center;
+    gap: 4rem;
+    padding-block: 4rem;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.5rem, 10vw, 5rem);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    color: var(--muted);
+  }
+
+  .hero-image-placeholder {
+    background: var(--accent-light);
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+  }
+
+  /* Buttons - High Contrast */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2.5rem;
+    border-radius: 0; /* Square edges for higher fashion feel */
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-primary {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border-color: var(--fg);
+    color: var(--fg);
+  }
+
+  .btn-outline:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  /* Category / Vibe Sections */
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-header h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.6rem 2rem;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .filter-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  /* Product Grid - Pure Visuals */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 6rem;
+  }
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .product-img-wrap {
+    background: var(--accent-light);
+    aspect-ratio: 3/4;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .product-details h3 {
+    font-size: 1.25rem;
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+  .product-details p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Promotion Section */
+  .promo-section {
+    padding-block: 6rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .promo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .promo-card {
+    background: var(--bg);
+    padding: 3rem;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .promo-tag {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.2rem 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Inclusivity Section */
+  .inclusivity-banner {
+    background: var(--accent-light);
+    padding-block: 6rem;
+    text-align: center;
+    margin-block: 6rem;
+    border-radius: 0;
+  }
+
+  .inclusivity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .info-card {
+    background: var(--surface);
+    padding: 3rem 2rem;
+    border-radius: 0;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+
+  .info-card:hover {
+    border-color: var(--accent);
+  }
+
+  /* Cart Sidebar */
+  .cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 450px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -20px 0 50px rgba(0,0,0,0.05);
+  }
+
+  .cart-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .cart-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cart-item-img {
+    width: 80px;
+    height: 110px;
+    background: var(--accent-light);
+    border-radius: 0;
+  }
+
+  .cart-footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .hero-content {
+      align-items: center;
+      order: 2;
+    }
+    .hero-image-placeholder {
+      order: 1;
+    }
+    .nav-links {
+      display: none;
+    }
+    .cart-sidebar {
+      width: 100%;
+    }
+    .promo-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&family=Playfair+Display:wght@700&display=swap">
+
+<!-- SEO META TAGS FOR GOOGLE RANKING -->
+<meta name="description" content="DDJ Luxury - Warri's most trusted inclusive boutique. High-end women's fashion for all sizes (XS-3XL). Nationwide delivery. Find your perfect fit.">
+<meta name="keywords" content="women's fashion Warri, luxury clothes all sizes, inclusive fashion Nigeria, perfect gift for women, DDJ Luxury, inclusive elegance">
+<meta name="author" content="DDJ Luxury">
+
+<nav>
+  <div class="container nav-content">
+    <a href="#" class="logo">DDJ LUXURY</a>
+    <ul class="nav-links">
+      <li><a href="#shop">Collections</a></li>
+      <li><a href="#inclusivity">The Fit</a></li>
+      <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="action-btn" aria-label="Search">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <button class="action-btn" onclick="toggleCart()" aria-label="Cart">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="container">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Elegance for <br><span class="text-accent">Every Woman.</span></h1>
+      <p>Curating the world's finest multi-brand fashion for silhouettes of all sizes. Because luxury is not a size—it is a feeling.</p>
+      <div style="display: flex; gap: 1rem;">
+        <a href="#shop" class="btn btn-primary">Shop the Edit</a>
+        <a href="#inclusivity" class="btn btn-outline">Our Philosophy</a>
+      </div>
+    </div>
+    <div class="hero-image-placeholder" style="border: none; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+      <img src="owner image.png" alt="CEO of DDJ Luxury" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+  </section>
+</header>
+
+<section id="shop" class="container" style="padding-block: 6rem;">
+  <div class="section-header">
+    <h2>Shop by Vibe</h2>
+    <p class="text-muted">Choose the energy you want to project today.</p>
+  </div>
+
+  <div class="filter-bar" id="vibe-filters">
+    <button class="filter-btn active" onclick="filterProducts('all')">The Full Gallery</button>
+    <button class="filter-btn" onclick="filterProducts('power')">Executive Power</button>
+    <button class="filter-btn" onclick="filterProducts('evening')">Evening Allure</button>
+    <button class="filter-btn" onclick="filterProducts('weekend')">Quiet Luxury</button>
+    <button class="filter-btn" onclick="filterProducts('luxe')">Timeless Essentials</button>
+  </div>
+
+  <div class="product-grid" id="product-grid">
+    <!-- Products injected by JS from products.js -->
+  </div>
+</section>
+
+<section class="promo-section">
+  <div class="container">
+    <div class="promo-grid">
+      <div class="promo-card">
+        <span class="promo-tag">Curated Offer</span>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">The Boutique Bundle</h3>
+        <p class="text-muted" style="margin-bottom: 2rem;">Why choose one when you can have the complete look? Request a "Boutique Bundle" (Top + Bottom + Accessory) for a special curated price and a seamless, styled ensemble.</p>
+        <a href="https://wa.me/2348108165766" target="_blank" class="btn btn-primary">Request Bundle</a>
+      </div>
+      <div class="promo-card">
+        <span class="promo-tag">Exclusive</span>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Elite Drop Alerts</h3>
+        <p class="text-muted" style="margin-bottom: 2rem;">Our most rare pieces sell out in minutes. Join our priority list to get notified before the public. Access the unattainable.</p>
+        <a href="https://wa.me/2348108165766" target="_blank" class="btn btn-outline">Join Priority List</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inclusivity" class="container">
+  <div class="inclusivity-banner">
+    <div class="container">
+      <h2 style="font-size: 3rem; margin-bottom: 1.5rem;">Inclusive by Nature</h2>
+      <p class="text-muted" style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">We don't just sell sizes; we solve the fit. DDJ Luxury curates brands that understand the architecture of the female body, from XS to 3XL.</p>
+
+      <div style="text-align: center; margin-bottom: 4rem;">
+        <p style="font-family: var(--font-display); font-style: italic; font-size: 1.5rem; color: var(--fg); max-width: 700px; margin: 0 auto;">
+          "Every woman deserves to feel like a masterpiece. We believe luxury isn't defined by a number on a tag, but by how you feel when you step into the room."
+        </p>
+        <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; margin-top: 1rem; color: var(--accent); font-weight: 600;">— CEO, DDJ Luxury</p>
+      </div>
+
+      <div class="inclusivity-grid">
+        <div class="info-card">
+          <h3 style="margin-bottom: 1rem;">Precision Curation</h3>
+          <p class="text-muted" style="font-size: 0.9rem;">We vet every brand for size consistency, so you can shop with confidence across different labels.</p>
+        </div>
+        <div class="info-card">
+          <h3 style="margin-bottom: 1rem;">Real Body Proof</h3>
+          <p class="text-muted" style="font-size: 0.9rem;">Visual guides showing how each piece behaves on diverse silhouettes. Real clothes, real bodies.</p>
+        </div>
+        <div class="info-card">
+          <h3 style="margin-bottom: 1rem;">Bespoke Guidance</h3>
+          <p class="text-muted" style="font-size: 0.9rem;">One-on-one fit consultations via WhatsApp to ensure your piece is a perfect match.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery" class="container" style="padding-block: 6rem;">
+  <div class="section-header">
+    <h2>The Luxe Experience</h2>
+    <p class="text-muted">Seamless delivery and concierge-level care.</p>
+  </div>
+  <div class="inclusivity-grid">
+    <div class="info-card" style="text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🚚</div>
+      <h3>Nationwide Priority</h3>
+      <p class="text-muted" style="font-size: 0.9rem;">Insured, fast delivery from Warri to any corner of the country. Your package is handled with absolute care.</p>
+    </div>
+    <div class="info-card" style="text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🔄</div>
+      <h3>Perfect Fit Guarantee</h3>
+      <p class="text-muted" style="font-size: 0.9rem;">Not the right fit? We offer seamless size exchanges. We don't stop until you feel absolutely stunning.</p>
+    </div>
+    <div class="info-card" style="text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🎁</div>
+      <h3>Unboxing Ritual</h3>
+      <p class="text-muted" style="font-size: 0.9rem;">Our signature sustainable packaging transforms a delivery into an event.</p>
+    </div>
+  </div>
+</section>
+
+<footer style="background: var(--surface); border-top: 1px solid var(--border); padding-block: 5rem; margin-top: 6rem;">
+  <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem;">
+    <div >
+      <a href="#" class="logo" style="display: block; margin-bottom: 1.5rem;">DDJ LUXURY</a>
+      <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.8;">
+        📌 Most trusted boutique in Warri<br>
+        📌 We deliver nationwide 🛍
+      </p>
+      <p class="text-muted" style="font-size: 0.8rem; font-family: var(--font-mono);">
+        Opp Ejewor Street, off Polokoro Market, Warri
+      </p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+      <h4 style="margin-bottom: 1.5rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">Explore</h4>
+      <ul style="list-style: none; padding: 0; font-size: 0.9rem;" class="text-muted">
+        <li style="margin-bottom: 0.7rem;"><a href="#" style="color: inherit; text-decoration: none;">New Arrivals</a></li>
+        <li style="margin-bottom: 0.7rem;"><a href="#" style="color: inherit; text-decoration: none;">Best Sellers</a></li>
+        <li style="margin-bottom: 0.7rem;"><a href="#" style="color: inherit; text-decoration: none;">Fit Guide</a></li>
+      </ul>
+    </div>
+    <div >
+      <h4 style="margin-bottom: 1.5rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em;">Connect</h4>
+      <ul style="list-style: none; padding: 0; font-size: 0.9rem;" class="text-muted">
+        <li style="margin-bottom: 0.7rem;">
+          <a href="https://wa.me/2348108165766" target="_blank" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M.004a.004.004 0 0 0 0 .008.004.004 0 0 0 0-.008zM12 0C5.373 0 0 5.373 0 12c0 2.14 0.624 4.163 1.723 6.012L0 24l6.134-1.611A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            WhatsApp: 08108165766
+          </a>
+        </li>
+        <li style="margin-bottom: 0.7rem;">
+          <a href="https://www.instagram.com/ddj_luxury_?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.252-.149-4.771-1.691-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.205.012-3.584.069-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.058-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.2-4.358-2.618-6.78-6.98-6.98-1.281-.058-1.69-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.22 0-4.03-1.81-4.03-4.03 0-2.22 1.81-4.03 4.03-4.03s4.03 1.81 4.03 4.03c0 2.22-1.81 4.03-4.03 4.03z"/></svg>
+            Instagram @ddj_luxury_
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; font-size: 0.8rem; color: var(--muted);">
+    &copy; 2026 DDJ Luxury. All Rights Reserved.
+  </div>
+</footer>
+
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h2 style="margin: 0; font-size: 1.25rem;">Your Curated Bag</h2>
+    <button class="action-btn" onclick="toggleCart()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <!-- Items injected by JS -->
+  </div>
+  <div class="cart-footer">
+    <div style="text-align: center; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--muted);">
+      Please specify your size in the checkout message.
+    </div>
+    <button class="btn btn-primary" style="width: 100%;" onclick="sendToWhatsApp()">Request via WhatsApp</button>
+  </div>
+</div>
+
+<script src="products.js"></script>
+<script>
+  let cart = [];
+
+  function renderProducts(filter = 'all') {
+    const grid = document.getElementById('product-grid');
+    grid.innerHTML = '';
+
+    const filtered = filter === 'all' ? products : products.filter(p => p.vibe === filter);
+
+    filtered.forEach(p => {
+      const isSoldOut = p.status === 'sold out';
+      grid.innerHTML += `
+        <div class="product-card">
+          <div class="product-img-wrap">
+            ${isSoldOut ? '<div style="position:absolute; top:1rem; left:1rem; background:var(--error); color:white; padding:0.2rem 0.6rem; font-size:0.7rem; font-weight:700; text-transform:uppercase; z-index:10;">Sold Out</div>' : ''}
+            <img src="${p.img}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;">
+            <button onclick="${isSoldOut ? '' : `addToCart(${p.id})`}"
+                    class="btn btn-primary"
+                    style="position: absolute; bottom: 1rem; right: 1rem; padding: 0.6rem 1.2rem; font-size: 0.75rem; ${isSoldOut ? 'background:var(--muted); cursor:not-allowed;' : ''}">
+              ${isSoldOut ? 'Sold Out' : 'Add to Bag'}
+            </button>
+          </div>
+          <div class="product-info">
+            <div class="product-details">
+              <h3>${p.name}</h3>
+              <p>Available: ${p.sizes}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function filterProducts(vibe) {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.innerText.toLowerCase().includes(vibe) || (vibe === 'all' && btn.innerText === 'The Full Gallery'));
+    });
+    renderProducts(vibe);
+  }
+
+  function toggleCart() {
+    document.getElementById('cart-sidebar').classList.toggle('open');
+  }
+
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    cart.push(product);
+    updateCart();
+    toggleCart();
+  }
+
+  function updateCart() {
+    const itemsDiv = document.getElementById('cart-items');
+    const countSpan = document.getElementById('cart-count');
+
+    itemsDiv.innerHTML = '';
+
+    cart.forEach((item, index) => {
+      itemsDiv.innerHTML += `
+        <div class="cart-item">
+          <div class="cart-item-img" style="background-image: url('${item.img}'); background-size: cover; background-position: center;"></div>
+          <div class="product-details" style="flex: 1;">
+            <h3 style="font-size: 0.9rem;">${item.name}</h3>
+            <p style="font-size: 0.8rem; color: var(--muted);">Size: ${item.sizes}</p>
+          </div>
+          <button class="action-btn" onclick="removeItem(${index})" style="color: var(--error);">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          </button>
+        </div>
+      `;
+    });
+
+    countSpan.innerText = cart.length;
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+  }
+
+  function sendToWhatsApp() {
+    if (cart.length === 0) return alert('Your bag is empty.');
+
+    const phone = '2348108165766';
+    let message = 'Hello DDJ Luxury! I would like to order the following pieces:\n\n';
+
+    cart.forEach((item, index) => {
+      message += `${index + 1}. ${item.name} (Size: ${item.sizes})\n`;
+    });
+
+    message += '\n\nPlease let me know the total price and delivery details to Warri/Nationwide. Thank you!';
+
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+  }
+
+  renderProducts();
+</script>
