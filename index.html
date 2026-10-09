@@ -441,28 +441,86 @@
     font-size: 1.2rem;
   }
 
-  /* Mobile Responsiveness */
+  /* Payment Trust Bar */
+  .payment-trust-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .trust-text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .payment-icons {
+    display: flex;
+    gap: 1rem;
+    filter: grayscale(1) opacity(0.6);
+    align-items: center;
+  }
+  .payment-icons svg {
+    height: 20px;
+    width: auto;
+  }
+
+  /* Elite Signup Section */
+  .elite-signup {
+    background: var(--accent-light);
+    padding-block: 6rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .signup-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .signup-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+  .signup-form input {
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-family: var(--font-body);
+    width: 300px;
+    outline: none;
+  }
+  .signup-form input:focus {
+    border-color: var(--accent);
+  }
+
+  /* Virtual Styling Section */
+  .styling-section {
+    padding-block: 6rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .styling-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .styling-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--accent-light);
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
   @media (max-width: 768px) {
-    .hero {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .hero-content {
-      align-items: center;
-      order: 2;
-    }
-    .hero-image-placeholder {
-      order: 1;
-    }
-    .nav-links {
-      display: none;
-    }
-    .cart-sidebar {
-      width: 100%;
-    }
-    .promo-grid {
-      grid-template-columns: 1fr;
-    }
+    .styling-grid { grid-template-columns: 1fr; text-align: center; }
+    .signup-form { flex-direction: column; align-items: center; }
+    .signup-form input { width: 100%; }
   }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&family=Playfair+Display:wght@700&display=swap">
